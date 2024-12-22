@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/frontend/node_modules
 /.pnp
 .pnp.js
 
@@ -22,14 +22,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.env
+/frontend/src/.env
 
 
 *.pyc
-__pycache__/
+/thrifty/__pycache__/
 .env
 media/
 static/
 db.sqlite3
 
-src/services/supabase/*.js
+/frontendsrc/services/supabase/*.js
