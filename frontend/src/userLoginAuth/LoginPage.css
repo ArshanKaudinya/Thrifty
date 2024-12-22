@@ -1,0 +1,26 @@
+.login-page {
+  text-align: center;
+  padding: 20px;
+}
+
+form input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+form button {
+  padding: 10px 20px;
+  color: white;
+  background-color: #117df3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0f5fd1;
+}

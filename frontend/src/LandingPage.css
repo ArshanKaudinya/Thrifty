@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 4vh 15vh 2vh 15vh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.navbar-brand {
+    font-family: "Asap", serif;
+    font-size: 5vh;
+    font-weight: 300;
+    font-style: italic;
+    color: #117df3;
+}
+
+.navbar-links {
+    font-family: "Asap", serif;
+    font-size: 5vh;
+    font-weight: 200;
+    font-style: italic;
+    list-style: none;
+    display: flex;
+    gap: 4vh;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-links a {
+    position: relative;
+    font-size: 2.1vh;
+    color: #117df3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Underline effect only on links with class 'underline-link' */
+.underline-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.5vh;
+    width: 0;
+    height: 0.3vh;
+    background-color: #117df3;
+    border-radius: 0.7vh;
+    transition: width 0.3s ease;
+}
+
+/* Expand underline only on hover of 'underline-link' */
+.underline-link:hover::after {
+    width: 100%;
+}
+ 
+.avatar {
+    width: 4.7vh;           /* Adjust size as needed */
+    height: 4.7vh;          /* Ensure the avatar is a square */
+    margin-bottom: -1.7vh;
+    margin-left: 0vh;
+    border-radius: 100%;    /* Make it circular */
+    object-fit: cover;     /* Ensure the image fills the container without stretching */
+    border: 0.2vh solid #000000; /* Optional border color for styling */
+    transition: transform 0.3s ease; /* Optional: Add a subtle hover effect */
+  }
+  
+.avatar:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/*Landing Page*/
+.landing {
+    height: 80vh;  /* Covers part of the viewport */
+    background-color: white;  /* White background */
+}
+  
+.landing-one {
+    display: flex;
+    background-image: url(img-assets/landing_bg.jpg);
+    background-size: 70%;  /* Set to a smaller size */
+    background-color: white;  /* White background */
+    background-repeat: no-repeat;  /* Prevents image repetition */
+    background-position: center;  /* Centers the image */
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjusts to make the button center vertically in the section */
+}
+
+.getStarted {
+    position: relative;
+    padding: 1vh 3vh;
+    color: white;
+    background-color: #117df3;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin-bottom: -3.7vh;
+}
+
+.getStarted::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500%; /* Reduce width for better performance */
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.15) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    animation: moveStripes 8s linear infinite;
+    will-change: transform; /* Improve performance with hardware acceleration */
+    pointer-events: none;
+}
+
+@keyframes moveStripes {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.getStarted:hover {
+    transform: scale(1.02);
+}
+
+.getStarted:hover::before {
+    animation-duration: 4s;
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 170vh; /* Adjust as needed */
+    margin-left: 15vh;
+    margin-top: -9.68vh;
+}
+
+.intro-text {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+}
+
+.intro-text span {
+    font-family: "Public Sans", sans-serif;
+    font-size: 6.5vh;
+    font-weight: 500 !important;
+    font-style: italic !important;
+    color: #117df3;
+    position: relative;
+}
+
+.intro-text span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    margin-top: 6.8vh;
+    width: 35.5%; /* half underline */
+    height: 0.5vh; /* thickness of the underline */
+    background-color: #117df3; /* match underline color to the text color */
+}
+
+.intro-text p {
+    font-family: "Public Sans", sans-serif;
+    font-size: 3vh;
+    line-height: 1.3;
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 7vh;
+}
+
+.intro-image {
+    flex: 1;
+    padding: 0.5vh;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.intro-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Optional: for rounded corners */
+}
+
+.widgets {
+    position: relative;
+    margin-top: 8.2vh;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+        url(img-assets/widgets_bg.jpg); /* Layer the gradient over the image */
+    background-size: 35%;
+    background-repeat: repeat; /* Repeat the image for a seamless effect */
+    animation: moveBackground 100s linear infinite; /* Infinite scrolling animation */
+    height: 60vh;
+}
+
+/* Move the background upwards */
+@keyframes moveBackground {
+    0% {
+        background-position-y: 0;
+    }
+    100% {
+        background-position-y: -1000%; /* Moves the background image up */
+    }
+}
+/* Container styling */
+.box-container {
+    padding-top: 10vh;
+    display: flex;
+    justify-content: space-evenly; /* Space between each box */
+    align-items: flex-start; /* Align boxes to the top */
+    gap: 2vh; /* Space between boxes */
+    opacity: 1;
+}
+
+/* Box styling */
+.box {
+    width: 30vh; /* Adjusted box size */
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column; /* Stack image, title, and description vertically */
+    align-items: center;
+    border-radius: 2vh;
+    box-shadow: -0.8vh 0.8vh 1vh rgba(0, 0, 0, 0.1);
+    padding: 2vh;
+    opacity: 0; /* Start hidden for scroll effect */
+    transform: translateY(3vh); /* Start below */
+    transition: opacity 1s ease, transform 1s ease;
+    overflow: visible;
+}
+
+.box p{
+    font-weight: 450;
+    font-size: 1.7vh;
+}
+
+.box:hover {
+    transform: scale(1.02);
+}
+
+/* Image styling */
+.box-image {
+    width: 25vh;
+    height: 25vh;
+    border-radius: 2vh;
+    object-fit: cover;
+    margin-bottom: 1vh;
+}
+
+/* Title styling */
+.box-title {
+    text-align: center;
+    font-family: "Asap", serif;
+    font-size: 2.5vh;
+    font-weight: 200;
+    font-style: italic;
+    color: #117df3;
+    margin: 0.5vh 0; /* Space above and below the title */
+}
+
+/* Description styling */
+.box-description {
+    font-size: 1.5vh;
+    color: #555;
+    text-align: center;
+    line-height: 1.4;
+    margin-top: 0.5vh;
+}
+
+/* Sequential animation for each box on scroll */
+.box-container.in-view .box:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.box-container.in-view .box:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+.box-container.in-view .box:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+}
+
+/* Footer Container */
+.footer {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: row;
+    gap: 35vh;
+    font-family: "Public Sans", sans-serif;
+    padding: 6vh 14vh;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    height: 28vh;
+    background-color: #117df3;
+}
+
+/* Social Links Section */
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-social h4 {
+    font-size: 3.2vh;
+    margin-top: 1.2vh;
+}
+
+.social-icons a {
+    margin-right: 1vh;
+}
+
+.social-icons img {
+    width: 3vh;
+    height: 3vh;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover img {
+    transform: scale(1.1);
+}
+
+/* Address Section */
+.footer-address {
+    font-size: 2vh;
+    line-height: 1.5;
+    margin-top: 1vh;
+}
+
+/* Help and Support Section */
+.footer-help {
+    text-align: center;
+}
+
+.footer-help h4 {
+    font-size: 2vh;
+    margin-bottom: 1vh;
+}
+
+.footer-help a {
+    display: block;
+    font-size: 1.8vh;
+    color: #fff;
+    margin-bottom: 0.5vh;
+    text-decoration: none;
+}
+
+.footer-help a:hover {
+    text-decoration: underline;
+}
+
+/* Legal Links Section */
+.footer-legal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 3vh;
+}
+
+.footer-legal a {
+    font-size: 1.8vh;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 0.5vh;
+}
+
+.footer-legal a:hover {
+    text-decoration: underline;
+}
+
