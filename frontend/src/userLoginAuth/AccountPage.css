@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Asap", sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.account-page-container {
+    max-width: 800px;
+    margin: 5vh auto;
+    padding: 3vh;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.welcome-header {
+    font-family: "Asap", serif;
+    font-size: 4vh;
+    color: #117df3;
+    margin-bottom: 3vh;
+}
+
+.user-details {
+    font-family: "Public Sans", sans-serif;
+    font-size: 2.1vh;
+    line-height: 2.8vh;
+    text-align: left;
+    padding: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.logout-button {
+    margin-top: 3vh;
+    padding: 1vh 4vh;
+    font-size: 2.2vh;
+    font-family: "Baloo 2", serif;
+    color: #fff;
+    background-color: #117df3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #0056b3;
+}
+
+.loading {
+    font-family: "Public Sans", sans-serif;
+    font-size: 2.5vh;
+    text-align: center;
+    margin-top: 20vh;
+}

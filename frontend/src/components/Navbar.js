@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../services/supabase/supabaseClient'; // Adjust the path as needed
 import avatarImage from './img-assets/def-user-icon.png';
 import searchIcon from './img-assets/search-analytics.png';
 import './Navbar.css';
@@ -9,7 +10,18 @@ const SEARCH_TIMEOUT = 500;
 function Navbar() {
   const [searchActive, setSearchActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSignedIn, setIsSignedIn] = useState(false); // To track user authentication state
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check Supabase session to determine if the user is signed in
+    const checkSession = async () => {
+      const { data: session } = await supabase.auth.getSession();
+      setIsSignedIn(!!session?.session?.user); // Set to true if a user session exists
+    };
+
+    checkSession();
+  }, []);
 
   // Handle search form submission
   const handleSearchSubmit = (e) => {
@@ -24,14 +36,22 @@ function Navbar() {
   const handleSearchClick = (e) => {
     // Add the animation class
     e.currentTarget.classList.add('search-icon-clicked');
-    
+  };
+
+  // Redirect based on authentication status
+  const handleAvatarClick = () => {
+    if (isSignedIn) {
+      navigate('/account'); // Redirect to Account Page if signed in
+    } else {
+      navigate('/login'); // Redirect to Login Page if not signed in
+    }
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-brand">Thrifty</div>
       <ul className="navbar-links">
-      <li>
+        <li>
           {!searchActive && (
             <img
               src={searchIcon}
@@ -61,9 +81,12 @@ function Navbar() {
         <li><Link to="/browse" className="underline-link">Browse</Link></li>
         <li><Link to="/settings" className="underline-link">Settings</Link></li>
         <li>
-          <Link to="/profile">
-            <img src={avatarImage} alt="User Avatar" className="avatar" />
-          </Link>
+          <img
+            src={avatarImage}
+            alt="User Avatar"
+            className="avatar"
+            onClick={handleAvatarClick} // Click event for redirecting based on auth state
+          />
         </li>
       </ul>
     </nav>
@@ -71,6 +94,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
 
 

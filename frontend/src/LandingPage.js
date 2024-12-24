@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './LandingPage.css';
 import Navbar from './components/Navbar';
 import heart from './img-assets/heart.jpg';
-import simpleflower from'./img-assets/simpleflower.jpg';
+import simpleflower from './img-assets/simpleflower.jpg';
 import hug from './img-assets/hug.jpg';
 import instagram_icon from './img-assets/instagram.png';
 import linkedin_icon from './img-assets/linkedin.png';
@@ -24,76 +24,91 @@ function LandingPage() {
       { threshold: 0.3 }
     );
 
-    if (boxContainerRef.current) {
-      observer.observe(boxContainerRef.current);
+    const currentBoxContainer = boxContainerRef.current;
+
+    if (currentBoxContainer) {
+      observer.observe(currentBoxContainer);
     }
 
     return () => {
-      if (boxContainerRef.current) {
-        observer.unobserve(boxContainerRef.current);
+      if (currentBoxContainer) {
+        observer.unobserve(currentBoxContainer);
       }
     };
   }, []);
 
   return (
     <div className="landing">
-      {/* ------------ Navigation Bar ----------- */}
+      {/* Navigation Bar */}
       <Navbar />
-      
+
       <div className="landing-one">
         <button className="getStarted">Get started</button>
       </div>
 
-      <div class="intro">
-        <div class="intro-text">
-            <span>Thrifting made easy.</span>
-            <p>Our goal is to make thrifting a part of everyday life. 
-            <br></br>
-            <br></br>
-            Anywhere you are, we make thrifting simple—helping you pass along what you no longer need and discover new finds effortlessly.</p>
+      <div className="intro">
+        <div className="intro-text">
+          <span>Thrifting made easy.</span>
+          <p>
+            Our goal is to make thrifting a part of everyday life.
+            <br />
+            <br />
+            Anywhere you are, we make thrifting simple—helping you pass along what you no longer need and discover new finds effortlessly.
+          </p>
         </div>
-        <div class="intro-image">
-            <img src= { intro_image } alt="Intro Image"></img>
+        <div className="intro-image">
+          <img src={intro_image} alt="Intro" />
         </div>
-      </div> 
-     { /*  ----------- widgets --------- */ }
-      <div className= 'widgets'>
+      </div>
+
+      {/* Widgets */}
+      <div className="widgets">
         <div className="box-container" ref={boxContainerRef}>
           <div className="box">
-            <img src= { heart } alt="Box 1" className="box-image" />
+            <img src={heart} alt="Trust" className="box-image" />
             <h2 className="box-title">TRUST</h2>
-            <p className="box-description">Trust is paramount. We safeguard user safety with strict data minimization and unwavering transparency.</p>
+            <p className="box-description">
+              Trust is paramount. We safeguard user safety with strict data minimization and unwavering transparency.
+            </p>
           </div>
           <div className="box">
-            <img src= { simpleflower } alt="Box 2" className="box-image" />
+            <img src={simpleflower} alt="Simplicity" className="box-image" />
             <h2 className="box-title">SIMPLICITY</h2>
-            <p className="box-description">Simplicity is our core. We ensure effortless navigation and intuitive design for a seamless user experience.</p>
+            <p className="box-description">
+              Simplicity is our core. We ensure effortless navigation and intuitive design for a seamless user experience.
+            </p>
           </div>
           <div className="box">
-            <img src={ hug } alt="Box 3" className="box-image"/>
+            <img src={hug} alt="Community" className="box-image" />
             <h2 className="box-title">COMMUNITY</h2>
-            <p className="box-description">Our community is everything. We’re committed to creating a trusted space where every member feels valued.</p>
+            <p className="box-description">
+              Our community is everything. We’re committed to creating a trusted space where every member feels valued.
+            </p>
           </div>
         </div>
-        { /*--------Footer-------*/ }
+
+        {/* Footer */}
         <footer className="footer">
-          {/* Social Links Section */}
+          {/* Social Links */}
           <div className="footer-social">
             <h4>Follow Us</h4>
             <div className="social-icons">
-              <a href="#"><img src= { facebook_icon } alt="Facebook" /></a>
-              <a href="#"><img src= { linkedin_icon } alt="Linkedin" /></a>
-              <a href="#"><img src= { instagram_icon } alt="Instagram" /></a>
-              {/* Add more icons as needed */}
+              <a href="#"><img src={facebook_icon} alt="Facebook" /></a>
+              <a href="#"><img src={linkedin_icon} alt="LinkedIn" /></a>
+              <a href="#"><img src={instagram_icon} alt="Instagram" /></a>
             </div>
           </div>
 
-          {/* Address Section */}
+          {/* Address */}
           <div className="footer-address">
-            <p>Developed in: <br />VIT Chennai<br />Tamil Nadu</p>
+            <p>
+              Developed in: <br />
+              VIT Chennai<br />
+              Tamil Nadu
+            </p>
           </div>
 
-          {/* Help and Support Section */}
+          {/* Help and Support */}
           <div className="footer-help">
             <h4>Help & Support</h4>
             <a href="#">FAQs</a>
@@ -101,7 +116,7 @@ function LandingPage() {
             <a href="#">Live Chat</a>
           </div>
 
-          {/* Legal Links Section */}
+          {/* Legal Links */}
           <div className="footer-legal">
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policy</a>
@@ -115,4 +130,3 @@ function LandingPage() {
 }
 
 export default LandingPage;
-

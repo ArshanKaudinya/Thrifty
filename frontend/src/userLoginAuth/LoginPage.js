@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
+import { supabase } from '../services/supabase/supabaseClient'; // Adjust path as needed
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://127.0.0.1:8000/api/token/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      localStorage.setItem('access', data.access);
-      localStorage.setItem('refresh', data.refresh);
-      window.location.href = '/account'; // Redirect to account page
-    } else {
-      alert('Invalid credentials');
+    setIsLoading(true);
+    setError('');
+    try {
+      const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        setError(error.message);
+      } else {
+        // Save the session if needed; Supabase handles this automatically in most cases
+        console.log('Logged in user:', user);
+        navigate('/account'); // Redirect to account page
+      }
+    } catch (err) {
+      setError('An unexpected error occurred.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,8 +48,11 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
+      {error && <p className="error">{error}</p>}
       <p>
         Don't have an account? <a href="/register">Register</a>
       </p>

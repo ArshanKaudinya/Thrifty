@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import LandingPage from './LandingPage';
 import BrowsingPage from './BrowsingPage';
-import AccountPage from './account-and-login/AccountPage';
-import LoginPage from './account-and-login/LoginPage';
-import RegisterPage from './account-and-login/RegisterPage';
+import AccountPage from './userLoginAuth/AccountPage';
+import LoginPage from './userLoginAuth/LoginPage';
+import RegisterPage from './userLoginAuth/RegisterPage';
 
 
 
