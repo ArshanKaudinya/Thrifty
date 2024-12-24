@@ -51,7 +51,7 @@ function BrowsingPage({ items, isLoading, error }) {
   };
 
   if (isLoading) {
-    return <div className="loading">Loading products...</div>;
+    return <div className="loading">Loading items...</div>;
   }
 
   if (error) {
@@ -63,29 +63,29 @@ function BrowsingPage({ items, isLoading, error }) {
       <Navbar />
       <div className="content-container">
         <FilterBar onApplyFilters={applyFilters} />
-        <div className="product-grid">
+        <div className="item-grid">
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => (
               <Link
-                to={`/productdetails/${item.id}`} // Link to product details page
+                to={`/productdetails/${item.id}`} // Link to item details page
                 key={index}
-                className="product-card"
+                className="item-card"
               >
                 <div>
                   <img
                     src={item.image || 'placeholder.jpg'}
                     alt={item.name}
-                    className="product-image"
+                    className="item-image"
                   />
-                  <h3 className="product-title">{item.name}</h3>
-                  <p className="product-price">
+                  <h3 className="item-title">{item.name}</h3>
+                  <p className="item-price">
                     {item.price ? `$${item.price}` : 'Price not available'}
                   </p>
                 </div>
               </Link>
             ))
           ) : (
-            <p className="no-products">No products found</p>
+            <p className="no-items">No items found</p>
           )}
         </div>
       </div>
@@ -94,6 +94,7 @@ function BrowsingPage({ items, isLoading, error }) {
 }
 
 export default BrowsingPage;
+
 
 
 
