@@ -49,7 +49,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Thrifty</div>
+      <div><Link to="/" className="navbar-brand">Thrifty</Link></div>
       <ul className="navbar-links">
         <li>
           {!searchActive && (

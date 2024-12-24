@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: #fff;
     padding: 4vh 15vh 2vh 15vh;
     width: 100%;
     box-sizing: border-box;
@@ -19,6 +19,7 @@
     font-weight: 300;
     font-style: italic;
     color: #117df3;
+    text-decoration: none;
 }
 
 /* Links container */
@@ -75,6 +76,7 @@
     margin-bottom: -1.7vh;
     margin-left: 0vh;
     border-radius: 100%;    
+    cursor: pointer;
     object-fit: cover;    
     border: 0.2vh solid #000000; 
     transition: transform 0.3s ease;

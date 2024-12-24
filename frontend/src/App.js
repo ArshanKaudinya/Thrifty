@@ -6,6 +6,7 @@ import BrowsingPage from './BrowsingPage';
 import AccountPage from './userLoginAuth/AccountPage';
 import LoginPage from './userLoginAuth/LoginPage';
 import RegisterPage from './userLoginAuth/RegisterPage';
+import ProductPage from './ProductDetails.js';
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/browse" element={<BrowsingPage items={items} isLoading={isLoading} error={error} />} />
+          <Route path='/productdetails/:id' element={<ProductPage />} />
         </Routes>
       </div>
     </Router>

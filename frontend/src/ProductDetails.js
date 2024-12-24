@@ -1,34 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import './ProductDetails.css';
+import './ProductDetails.css'; // Import external CSS for additional styles
 
 function ProductDetails() {
-  const { id } = useParams(); // Extract product ID from URL
+  const { id } = useParams(); // Get product ID from the URL
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/products/${id}/`) // Fetch product details
-      .then((response) => response.json())
-      .then((data) => setProduct(data))
-      .catch((error) => console.error('Error fetching product:', error));
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/products/${id}/`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch product details');
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message || 'Failed to load product details.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
-  if (!product) {
-    return <div>Loading product details...</div>;
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
   }
 
   return (
-    <div className="product-details">
-      <Navbar />
-      <div className="product-info">
-        <img src={product.image || 'placeholder.jpg'} alt={product.name} className="product-image" />
-        <h1>{product.name}</h1>
-        <p>{product.price ? `$${product.price}` : 'Price not available'}</p>
-        <p>{product.description}</p>
+    <div className="product-details-container">
+      <h1 className="product-title">{product.name}</h1>
+      <img
+        className="product-image"
+        src={`http://127.0.0.1:8000${product.image}`}
+        alt={product.name}
+      />
+      <p className="product-description">{product.description}</p>
+      <p className="product-price">{`Price: $${product.price.toFixed(2)}`}</p>
+      <div className="product-meta">
+        <span>{`Category: ${product.category}`}</span>
+        <span>{`Condition: ${product.condition}`}</span>
       </div>
     </div>
   );
 }
 
 export default ProductDetails;
+
+

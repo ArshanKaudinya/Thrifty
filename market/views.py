@@ -8,6 +8,8 @@ from .models import Product, CustomUser
 from .serializers import ProductSerializer, CustomUserSerializer
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 class RegisterView(APIView):
     def post(self, request):
@@ -16,6 +18,20 @@ class RegisterView(APIView):
             serializer.save()
             return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+def productdetails(request, id):
+    product = get_object_or_404(Product, id=id)
+    return JsonResponse({
+        'id': product.id,
+        'name': product.name,
+        'description': product.description,
+        'price': float(product.price),  # Convert Decimal to float
+        'category': product.category,
+        'condition': product.condition,
+        'image': product.image.url if product.image else None,
+        'created_at': product.created_at,
+    })
 
 class LoginView(APIView):
     def post(self, request):

@@ -67,7 +67,7 @@ function BrowsingPage({ items, isLoading, error }) {
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => (
               <Link
-                to={`/product/${item.id}`} // Link to product details page
+                to={`/productdetails/${item.id}`} // Link to product details page
                 key={index}
                 className="product-card"
               >

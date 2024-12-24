@@ -1,93 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,900&family=Baloo+2:wght@772&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-/* Navigation Bar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 4vh 15vh 2vh 15vh;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.navbar-brand {
-    font-family: "Asap", serif;
-    font-size: 5vh;
-    font-weight: 300;
-    font-style: italic;
-    color: #117df3;
-}
-
-.navbar-links {
-    font-family: "Asap", serif;
-    font-size: 5vh;
-    font-weight: 200;
-    font-style: italic;
-    list-style: none;
-    display: flex;
-    gap: 4vh;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-links li {
-    display: inline;
-}
-
-.navbar-links a {
-    position: relative;
-    font-size: 2.1vh;
-    color: #117df3;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-/* Underline effect only on links with class 'underline-link' */
-.underline-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -0.5vh;
-    width: 0;
-    height: 0.3vh;
-    background-color: #117df3;
-    border-radius: 0.7vh;
-    transition: width 0.3s ease;
-}
-
-/* Expand underline only on hover of 'underline-link' */
-.underline-link:hover::after {
-    width: 100%;
-}
- 
-.avatar {
-    width: 4.7vh;           /* Adjust size as needed */
-    height: 4.7vh;          /* Ensure the avatar is a square */
-    margin-bottom: -1.7vh;
-    margin-left: 0vh;
-    border-radius: 100%;    /* Make it circular */
-    object-fit: cover;     /* Ensure the image fills the container without stretching */
-    border: 0.2vh solid #000000; /* Optional border color for styling */
-    transition: transform 0.3s ease; /* Optional: Add a subtle hover effect */
-  }
-  
-.avatar:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
-}
 
 /*Landing Page*/
 .landing {
-    height: 80vh;  /* Covers part of the viewport */
-    background-color: white;  /* White background */
+    height: 100vh;  /* Covers part of the viewport */
+    background-color: #fff !important;
 }
   
 .landing-one {
     display: flex;
     background-image: url(img-assets/landing_bg.jpg);
     background-size: 70%;  /* Set to a smaller size */
-    background-color: white;  /* White background */
     background-repeat: no-repeat;  /* Prevents image repetition */
     background-position: center;  /* Centers the image */
     justify-content: center;
@@ -151,10 +74,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    max-width: 170vh; /* Adjust as needed */
-    margin-left: 15vh;
-    margin-top: -9.68vh;
+    padding-top: 1vh;
+    padding-left: 15vh;
+    padding-right: 15vh;
+    padding-bottom: 10vh;
+    background-color: #fff !important;
 }
 
 .intro-text {
@@ -206,7 +130,7 @@
 
 .widgets {
     position: relative;
-    margin-top: 8.2vh;
+    padding-top: 8.2vh;
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
         url(img-assets/widgets_bg.jpg); /* Layer the gradient over the image */
@@ -214,6 +138,7 @@
     background-repeat: repeat; /* Repeat the image for a seamless effect */
     animation: moveBackground 100s linear infinite; /* Infinite scrolling animation */
     height: 60vh;
+    
 }
 
 /* Move the background upwards */
@@ -227,7 +152,8 @@
 }
 /* Container styling */
 .box-container {
-    padding-top: 10vh;
+    padding-top: 5vh;
+    padding-bottom: 11.8vh;
     display: flex;
     justify-content: space-evenly; /* Space between each box */
     align-items: flex-start; /* Align boxes to the top */
@@ -309,9 +235,12 @@
     transition-delay: 0.8s;
 }
 
+.filler-div {
+    height: 20vh;
+    background-color: #fff;
+}
 /* Footer Container */
 .footer {
-    margin-top: 20vh;
     display: flex;
     flex-direction: row;
     gap: 35vh;
@@ -319,6 +248,7 @@
     padding: 6vh 14vh;
     color: #fff;
     width: 100%;
+    background-color: white;
     box-sizing: border-box;
     height: 28vh;
     background-color: #117df3;

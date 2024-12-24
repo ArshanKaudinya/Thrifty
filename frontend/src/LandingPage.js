@@ -86,7 +86,7 @@ function LandingPage() {
             </p>
           </div>
         </div>
-
+        <div className='filler-div'></div>
         {/* Footer */}
         <footer className="footer">
           {/* Social Links */}

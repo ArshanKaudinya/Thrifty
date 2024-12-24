@@ -28,7 +28,7 @@ function RegisterPage() {
 
     try {
       // Step 1: Register user in Supabase
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
       });
@@ -51,7 +51,7 @@ function RegisterPage() {
         navigate('/login');
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Failed to store additional data.');
+        setError(errorData.message || 'Failed to store data.');
       }
     } catch (err) {
       setError('An unexpected error occurred.');
