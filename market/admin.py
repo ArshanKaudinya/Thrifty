@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Product ,CustomUser
+from .models import Product ,CustomUser, UserProfile
 
 
 @admin.register(Product)
@@ -10,20 +10,12 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('id', 'email', 'name', 'mobile_number', 'college', 'city', 'date_joined')
-    search_fields = ('email', 'name', 'mobile_number', 'college', 'city')
-    ordering = ('id',)
-    list_filter = ()
+    list_display = ('id', 'email', 'name')
+    list_filter = ('id', 'email', 'name')
+    ordering = ('email',)
 
-    fieldsets = (
-        (None, {'fields': ('id', 'email', 'password')}),
-        ('Personal Info', {'fields': ('name', 'mobile_number', 'college', 'city')}),
-        ('Important Dates', {'fields': ('date_joined', 'last_login')}),
-    )
-
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password', 'name', 'mobile_number', 'college', 'city'),
-        }),
-    )
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'email', 'name', 'college', 'city', 'date_joined')
+    search_fields = ('email', 'name', 'college', 'city')
+    ordering = ('date_joined',)

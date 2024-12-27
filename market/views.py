@@ -4,22 +4,33 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status
 from django.db.models import Min, Max
-from .models import Product, CustomUser
-from .serializers import ProductSerializer, CustomUserSerializer
+from .models import Product, CustomUser, UserProfile
+from .serializers import ProductSerializer, CustomUserSerializer, UserProfileSerializer
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-
-class RegisterView(APIView):
-    def post(self, request):
-        serializer = CustomUserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+class UserProfileView(APIView):
+    def post(self, request):
+        serializer = UserProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'User profile created successfully'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, id=None):
+        if id:
+            profile = UserProfile.objects.filter(id=id).first()
+            if not profile:
+                return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+            serializer = UserProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        profiles = UserProfile.objects.all()
+        serializer = UserProfileSerializer(profiles, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 def productdetails(request, id):
     product = get_object_or_404(Product, id=id)
     return JsonResponse({
@@ -32,21 +43,6 @@ def productdetails(request, id):
         'image': product.image.url if product.image else None,
         'created_at': product.created_at,
     })
-
-class LoginView(APIView):
-    def post(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
-        user = authenticate(email=email, password=password)
-        if user:
-            return Response({'message': 'Login successful', 'user_id': user.id}, status=status.HTTP_200_OK)
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-class UserProfileView(APIView):
-    def get(self, request):
-        user = request.user
-        serializer = CustomUserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
         
 class ProductPagination(PageNumberPagination):

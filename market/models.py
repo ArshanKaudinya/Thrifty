@@ -19,7 +19,18 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class UserProfile(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)  # Supabase ID
+    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=255)
+    college = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.email})"
+    
+    
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, password=None, **extra_fields):
         if not email:
@@ -47,10 +58,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
     password = models.CharField(max_length=128)
-    mobile_number = models.CharField(max_length=15, blank=True, null=True)
-    college = models.CharField(max_length=255, blank=True, null=True)
-    city = models.CharField(max_length=100, blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
 
     groups = models.ManyToManyField(
         'auth.Group',

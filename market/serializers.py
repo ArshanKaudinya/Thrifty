@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, CustomUser
+from .models import Product, CustomUser, UserProfile
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,3 +18,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+    
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('id', 'email', 'name', 'college', 'city', 'date_joined')

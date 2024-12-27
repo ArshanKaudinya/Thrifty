@@ -5,10 +5,9 @@ import './RegisterPage.css';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
+    id: '', // Supabase ID will be fetched after registration
     email: '',
     name: '',
-    password: '',
-    mobile_number: '',
     college: '',
     city: '',
   });
@@ -28,22 +27,35 @@ function RegisterPage() {
 
     try {
       // Step 1: Register user in Supabase
-      const { error } = await supabase.auth.signUp({
+      const { data, error: supabaseError } = await supabase.auth.signUp({
         email: formData.email,
-        password: formData.password,
+        password: 'temporaryPassword123!', // Supabase requires a password for registration
       });
 
-      if (error) {
-        setError(error.message);
+      if (supabaseError) {
+        setError(supabaseError.message);
+        setLoading(false);
+        return;
+      }
+
+      const supabaseUserId = data?.user?.id;
+      if (!supabaseUserId) {
+        setError('Failed to retrieve user ID from Supabase.');
         setLoading(false);
         return;
       }
 
       // Step 2: Store additional data in Django
-      const response = await fetch('http://127.0.0.1:8000/api/register/', {
+      const response = await fetch('http://127.0.0.1:8000/api/userprofiles/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          id: supabaseUserId, // Use Supabase ID as the primary key
+          email: formData.email,
+          name: formData.name,
+          college: formData.college,
+          city: formData.city,
+        }),
       });
 
       if (response.ok) {
@@ -51,7 +63,7 @@ function RegisterPage() {
         navigate('/login');
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Failed to store data.');
+        setError(errorData.message || 'Failed to store data in Django.');
       }
     } catch (err) {
       setError('An unexpected error occurred.');
