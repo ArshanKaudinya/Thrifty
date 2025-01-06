@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { supabase } from '../services/supabase/supabaseClient'; // Adjust the path as needed
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
+import Navbar from '../components/Navbar';
+
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    id: '', // Supabase ID will be fetched after registration
+    id: '',
     email: '',
     name: '',
     college: '',
@@ -26,11 +28,11 @@ function RegisterPage() {
     setLoading(true);
 
     try {
-      // Step 1: Register user in Supabase
       const { data, error: supabaseError } = await supabase.auth.signUp({
         email: formData.email,
-        password: 'temporaryPassword123!', // Supabase requires a password for registration
+        password: formData.password, // Supabase requires a password for registration
       });
+
 
       if (supabaseError) {
         setError(supabaseError.message);
@@ -74,6 +76,7 @@ function RegisterPage() {
 
   return (
     <div className="register-page">
+      <Navbar />
       <h1>Register</h1>
       <form onSubmit={handleRegister}>
         <input

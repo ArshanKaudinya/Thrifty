@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../services/supabase/supabaseClient'; // Adjust path as needed
+import { supabase } from '../services/supabase/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import './AccountPage.css'; // Import the CSS file for styling
+import './AccountPage.css';
+import Navbar from '../components/Navbar.js'
 
 function AccountPage() {
   const [user, setUser] = useState(null);
@@ -14,7 +15,7 @@ function AccountPage() {
       if (session?.session?.user) {
         setUser(session.session.user);
       } else {
-        navigate('/login'); // Redirect to login if not authenticated
+        navigate('/login'); 
       }
       setLoading(false);
     };
@@ -23,8 +24,8 @@ function AccountPage() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    localStorage.clear(); // Clear any additional local storage data if needed
-    navigate('/login'); // Redirect to login page
+    localStorage.clear();
+    navigate('/login');
   };
 
   if (loading) {
@@ -32,16 +33,19 @@ function AccountPage() {
   }
 
   return (
-    <div className="account-page-container">
-      <h1 className="welcome-header">Welcome, {user?.email}!</h1>
-      <div className="user-details">
-        <p><strong>User ID:</strong> {user?.id}</p>
-        <p><strong>Email:</strong> {user?.email}</p>
-        <p><strong>Created At:</strong> {new Date(user?.created_at).toLocaleString()}</p>
+    <div className='account-page'>
+      <Navbar />
+      <div className="account-page-container">
+        <h1 className="welcome-header">Welcome, {user?.email}!</h1>
+        <div className="user-details">
+          <p><strong>User ID:</strong> {user?.id}</p>
+          <p><strong>Email:</strong> {user?.email}</p>
+          <p><strong>Created At:</strong> {new Date(user?.created_at).toLocaleString()}</p>
+        </div>
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
-      <button className="logout-button" onClick={handleLogout}>
-        Logout
-      </button>
     </div>
   );
 }
