@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 import Navbar from '../components/Navbar';
 
-
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    id: '',
     email: '',
     name: '',
     college: '',
     city: '',
+    password: '',
   });
+  const [avatar, setAvatar] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,17 +22,21 @@ function RegisterPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.files[0]);
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
+      // Step 1: Register user in Supabase
       const { data, error: supabaseError } = await supabase.auth.signUp({
         email: formData.email,
-        password: formData.password, // Supabase requires a password for registration
+        password: formData.password,
       });
-
 
       if (supabaseError) {
         setError(supabaseError.message);
@@ -47,17 +51,20 @@ function RegisterPage() {
         return;
       }
 
-      // Step 2: Store additional data in Django
+      // Step 2: Store additional data including avatar in Django
+      const formDataToSend = new FormData();
+      formDataToSend.append('id', supabaseUserId);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('college', formData.college);
+      formDataToSend.append('city', formData.city);
+      if (avatar) {
+        formDataToSend.append('avatar', avatar); // Attach avatar file
+      }
+
       const response = await fetch('http://127.0.0.1:8000/api/userprofiles/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: supabaseUserId, // Use Supabase ID as the primary key
-          email: formData.email,
-          name: formData.name,
-          college: formData.college,
-          city: formData.city,
-        }),
+        body: formDataToSend,
       });
 
       if (response.ok) {
@@ -104,11 +111,10 @@ function RegisterPage() {
           required
         />
         <input
-          type="text"
-          name="mobile_number"
-          placeholder="Mobile Number (Optional)"
-          value={formData.mobile_number}
-          onChange={handleChange}
+          type="file"
+          name="avatar"
+          accept="image/*"
+          onChange={handleAvatarChange}
         />
         <input
           type="text"
@@ -134,5 +140,6 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+
 
 

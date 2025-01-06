@@ -10,9 +10,13 @@ from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
     
 
 class UserProfileView(APIView):
+
+    parser_classes = (MultiPartParser, FormParser)
+
     def post(self, request):
         serializer = UserProfileSerializer(data=request.data)
         if serializer.is_valid():
@@ -30,6 +34,18 @@ class UserProfileView(APIView):
         profiles = UserProfile.objects.all()
         serializer = UserProfileSerializer(profiles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def patch(self, request, id):
+        profile = UserProfile.objects.filter(id=id).first()
+        if not profile:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        avatar = request.data.get('avatar')
+        if avatar:
+            profile.avatar = avatar
+            profile.save()
+
+        return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
     
 def productdetails(request, id):
     product = get_object_or_404(Product, id=id)

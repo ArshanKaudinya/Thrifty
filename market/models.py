@@ -20,6 +20,7 @@ class Product(models.Model):
         return self.name
 
 class UserProfile(models.Model):
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     id = models.CharField(max_length=255, primary_key=True)  # Supabase ID
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
