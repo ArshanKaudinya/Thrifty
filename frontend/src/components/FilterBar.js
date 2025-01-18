@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import InputRange from 'react-input-range';
+import 'react-input-range/lib/css/index.css';
+
 import './FilterBar.css';
 
-function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a prop
+function FilterBar({ onApplyFilters }) {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
   const [currentRange, setCurrentRange] = useState({ min: 0, max: 1000 });
   const [category, setCategory] = useState('');
@@ -9,7 +12,6 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
   const [sortBy, setSortBy] = useState('');
 
   useEffect(() => {
-    // Fetch min and max price from the backend
     fetch('http://127.0.0.1:8000/api/products/price-range/')
       .then((response) => response.json())
       .then((data) => {
@@ -19,24 +21,15 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
       .catch((error) => console.error('Error fetching price range:', error));
   }, []);
 
-  const handleRangeChange = (e) => {
-    const { name, value } = e.target;
-    setCurrentRange((prev) => ({
-      ...prev,
-      [name]: Number(value),
-    }));
-  };
-
   const handleApplyFilters = () => {
-    const filters = {
-      category,
-      condition,
-      priceMin: currentRange.min,
-      priceMax: currentRange.max,
-      sortBy,
-    };
     if (onApplyFilters) {
-      onApplyFilters(filters); // Call the parent component's function with filters
+      onApplyFilters({
+        category,
+        condition,
+        priceMin: currentRange.min,
+        priceMax: currentRange.max,
+        sortBy,
+      });
     }
   };
 
@@ -60,12 +53,9 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
     <aside className="filter-bar">
       <h4>Filters</h4>
       <ul>
-        {/* Category Filter */}
+        {/* CATEGORY DROPDOWN */}
         <li>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="">All Categories</option>
             <option value="electronics">Electronics</option>
             <option value="fashion">Fashion</option>
@@ -73,49 +63,26 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
           </select>
         </li>
 
-        {/* Price Range Filter */}
+        {/* PRICE RANGE SLIDER */}
         <li>
           <label>Price Range:</label>
           <div className="price-range">
             <span>
               ${currentRange.min} - ${currentRange.max}
             </span>
-            <div className="range-container">
-              <input
-                type="range"
-                name="min"
-                min={priceRange.min}
-                max={priceRange.max}
-                value={currentRange.min}
-                onChange={handleRangeChange}
-                className="range-input"
-              />
-              <input
-                type="range"
-                name="max"
-                min={priceRange.min}
-                max={priceRange.max}
-                value={currentRange.max}
-                onChange={handleRangeChange}
-                className="range-input"
-              />
-              <div
-                className="range-track"
-                style={{
-                  left: `${((currentRange.min - priceRange.min) /
-                    (priceRange.max - priceRange.min)) *
-                    100}%`,
-                  right: `${100 -
-                    ((currentRange.max - priceRange.min) /
-                      (priceRange.max - priceRange.min)) *
-                      100}%`,
-                }}
-              ></div>
-            </div>
+            <InputRange
+              maxValue={priceRange.max}
+              minValue={priceRange.min}
+              value={{ min: currentRange.min - 1, max: currentRange.max }}
+              onChange={(value) =>
+                setCurrentRange({ min: value.min - 1, max: value.max })
+              }
+              formatLabel={() => ''}
+            />
           </div>
         </li>
 
-        {/* Condition Filter */}
+        {/* CONDITION RADIO BUTTONS */}
         <li>
           <label>Condition:</label>
           <div>
@@ -153,13 +120,13 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
           </div>
         </li>
 
-        {/* Sort By Filter */}
+        {/* SORT BY DROPDOWN */}
         <li>
           <label>Sort By:</label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className='sort-by-list'
+            className="sort-by-list"
           >
             <option value="low-high">Price: Low to High</option>
             <option value="high-low">Price: High to Low</option>
@@ -168,11 +135,11 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
           </select>
         </li>
       </ul>
-       {/* Clear Filters Button */}
-       <button className="filters-btn" onClick={handleClearFilters}>
+
+      {/* ACTION BUTTONS */}
+      <button className="filters-btn" onClick={handleClearFilters}>
         Clear Filters
       </button>
-      {/* Apply Filters Button */}
       <button className="filters-btn" onClick={handleApplyFilters}>
         Apply Filters
       </button>
@@ -181,6 +148,7 @@ function FilterBar({ onApplyFilters }) { // Ensure onApplyFilters is passed as a
 }
 
 export default FilterBar;
+
 
 
 

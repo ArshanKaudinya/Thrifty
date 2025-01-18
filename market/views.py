@@ -1,21 +1,29 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework.views import APIView
 from rest_framework import status
 from django.db.models import Min, Max
 from .models import Product, CustomUser, UserProfile
 from .serializers import ProductSerializer, CustomUserSerializer, UserProfileSerializer
 from rest_framework.pagination import PageNumberPagination
-from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
     
+class UploadProductView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserProfileView(APIView):
 
-    parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def post(self, request):
         serializer = UserProfileSerializer(data=request.data)
@@ -39,13 +47,22 @@ class UserProfileView(APIView):
         profile = UserProfile.objects.filter(id=id).first()
         if not profile:
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
-
+        serializer = UserProfileSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
         avatar = request.data.get('avatar')
         if avatar:
             profile.avatar = avatar
             profile.save()
 
         return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
+    
+    def delete(self, request, id):
+        profile = UserProfile.objects.filter(id=id).first()
+        if not profile:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+        profile.delete()
+        return Response({'message': 'Profile deleted successfully'}, status=status.HTTP_200_OK)
     
 def productdetails(request, id):
     product = get_object_or_404(Product, id=id)
@@ -67,9 +84,10 @@ class ProductPagination(PageNumberPagination):
     max_page_size = 100
 
 
-class FilteredProductListView(ListAPIView):
+class FilteredProductListView(ListCreateAPIView):
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
+    parser_classes = [MultiPartParser, FormParser]
 
     def get_queryset(self):
         queryset = Product.objects.all()

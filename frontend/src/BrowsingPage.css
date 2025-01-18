@@ -23,7 +23,7 @@
 }
 
 .a {
-  text-decoration: none;
+  text-decoration: none ;
 }
 /* Item Card */
 .item-card {
@@ -31,7 +31,7 @@
   flex-direction: column;
   align-items: center;
   height: 50%;
-  text-decoration: none; /* Removes link styling */
+  text-decoration: none !important;
   background-color: #fff;
   border-radius: 2vh;
   box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);

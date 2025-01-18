@@ -6,7 +6,7 @@
   background-color: #fff;
   text-align: left;
   padding: 2vh;
-  width: 20vh;
+  width: 25vh;
   height: 80vh;
   font-family: "Asap";
   color: #117df3;
@@ -31,8 +31,8 @@
   margin-bottom: 3.5vh;
 }
 
+/* Price Range Container */
 .price-range {
-  margin-top: 1vh;
   font-size: 1.8vh;
 }
 
@@ -44,100 +44,68 @@
   font-weight: bold;
 }
 
-.range-container {
-  position: relative;
-  width: 100%;
-  height: 1vh;
-  background: #e6e6e6;
-  border-radius: 0.5vh;
-  margin-top: 1vh;
+.input-range__track {
+  background: #ddd !important; 
 }
 
-.range-track {
-  position: absolute;
-  height: 100%;
-  background-color: #117df3;
-  border-radius: 0.5vh;
+.input-range__track--active, .input-range__slider {
+  background: #117df3 !important;
 }
 
-.range-input {
-  position: absolute;
-  width: 100%;
-  height: 1vh;
-  margin: 0;
-  -webkit-appearance: none;
-  appearance: none;
-  background: none;
-  pointer-events: none; /* Ensure the range doesn't block track clicks */
-  z-index: 1;
-}
-
-.range-input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 1.7vh;
-  height: 1.7vh;
-  background: #117df3;
-  border-radius: 50%;
-  pointer-events: auto;
-  cursor: pointer;
-  box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-.range-input:focus::-webkit-slider-thumb {
-  background: #0f5fd1;
-}
-
-/* Update dropdown styles */
+/* Dropdown styles */
 select {
-    width: 100%;
-    padding: 0.2vh;
-    font-size: 1.8vh;
-    font-family: "Asap", serif;
-    font-weight: 300;
-    color: #117df3;
-    background: #f8f9fa; /* Light background */
-    border: 0.2vh solid #000; /* Border color matches theme */
-    border-radius: 1vh; /* Rounded corners */
-    outline: none;
-    cursor: pointer;
-    transition: background 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+  padding: 0.2vh;
+  font-size: 1.8vh;
+  font-family: "Asap", serif;
+  font-weight: 300;
+  color: #117df3;
+  background: #f8f9fa;
+  border: 0.2vh solid #000;
+  border-radius: 1vh;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 select:hover {
-    background: #e7f3ff; /* Slightly darker on hover */
-    border-color: #0f5fd1; /* Highlight border */
+  background: #e7f3ff;
+  border-color: #0f5fd1;
 }
 
 select:focus {
-    background: #ffffff; /* White background when focused */
-    border-color: #0f5fd1; /* More prominent border */
+  background: #ffffff;
+  border-color: #0f5fd1;
 }
 
 option {
-    font-size: 1.8vh;
-    padding: 0.5vh;
-    background: #ffffff; /* White background for options */
-    color: #117df3; /* Text color */
-    cursor: pointer;
+  font-size: 1.8vh;
+  padding: 0.5vh;
+  background: #ffffff;
+  color: #117df3;
+  cursor: pointer;
 }
- 
+
 .filters-btn {
-    width: 100%;
-    padding: 1vh 1vh;
-    font-size: 2vh;
-    font-family: "Asap", serif;
-    font-weight: 500;
-    color: #117df3;
-    background: #fff;
-    border-radius: 1vh;
-    border-color: #117df3;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 2vh;
+  width: 100%;
+  padding: 1vh 1vh;
+  font-size: 2vh;
+  font-family: "Asap", serif;
+  font-weight: 500;
+  color: #117df3;
+  background: #fff;
+  border-radius: 1vh;
+  border: 0.2vh solid #117df3;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2vh;
+}
+
+.filters-btn:hover {
+  background-color: #e7f3ff;
 }
 
 .sort-by-list {
-    margin-top: 0.8vh;
+  margin-top: 0.8vh;
 }
+

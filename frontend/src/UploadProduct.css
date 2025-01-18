@@ -1,0 +1,88 @@
+.upload-product h1 {
+  font-size: 4vh;
+  color: #117df3;
+  text-align: center;
+  margin-bottom: 4vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: 2.2vh;
+  padding: 1.5vh;
+  border: 1px solid #ddd;
+  border-radius: 1vh;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  height: 12vh;
+}
+
+select {
+  font-weight: bold;
+  color: #117df3;
+}
+
+input[type="file"] {
+  padding: 1vh;
+  border: none;
+  color: #333;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #117df3;
+  box-shadow: 0 0 1vh rgba(17, 125, 243, 0.5);
+}
+
+.conditions {
+  display: flex;
+  gap: 2vh;
+  align-items: center;
+}
+
+.conditions label {
+  font-size: 2vh;
+  color: #333;
+}
+
+button {
+  background-color: #117df3;
+  color: white;
+  border: none;
+  padding: 1.5vh;
+  border-radius: 1vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0f5fd1;
+  transform: scale(1.02);
+}
+
+.message {
+  color: green;
+  font-size: 2vh;
+  text-align: center;
+}
+
+form {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.upload-product h1 {
+  margin-top: 2vh;
+}

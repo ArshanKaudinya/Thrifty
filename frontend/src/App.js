@@ -7,7 +7,8 @@ import AccountPage from './userLoginAuth/AccountPage';
 import LoginPage from './userLoginAuth/LoginPage';
 import RegisterPage from './userLoginAuth/RegisterPage';
 import ProductPage from './ProductDetails.js';
-
+import ResetPassword from './userLoginAuth/ResetPassword';
+import UploadProduct from './UploadProduct.js';
 
 
 
@@ -39,6 +40,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/browse" element={<BrowsingPage items={items} isLoading={isLoading} error={error} />} />
           <Route path='/productdetails/:id' element={<ProductPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path='/upload' element={<UploadProduct />} />
         </Routes>
       </div>
     </Router>

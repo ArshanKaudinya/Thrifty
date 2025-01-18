@@ -100,8 +100,8 @@ function Navbar() {
             </form>
           )}
         </li>
+        <li><Link to="/upload" className='underline-link'>Upload</Link></li>
         <li><Link to="/browse" className="underline-link">Browse</Link></li>
-        <li><Link to="/settings" className="underline-link">Settings</Link></li>
         <li>
           <img
             src={userAvatar} // Use dynamic avatar URL

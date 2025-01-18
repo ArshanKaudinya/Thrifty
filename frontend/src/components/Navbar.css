@@ -19,7 +19,7 @@
     font-weight: 300;
     font-style: italic;
     color: #117df3;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 /* Links container */
@@ -39,6 +39,7 @@
     display: inline;
     align-items: center;
     vertical-align: middle;
+    
 }
 .navbar-links li img {
     margin-top: 1.2vh;
@@ -51,6 +52,7 @@
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+    text-decoration: none !important;
 }
 
 .underline-link::after {
@@ -60,7 +62,7 @@
     bottom: -0.5vh;
     width: 0;
     height: 0.3vh;
-    background-color: #117df3;
+    background-color: #FC60A8;
     border-radius: 0.7vh;
     transition: width 0.3s ease;
 }
