@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './ProductDetails.css'; // Import external CSS for additional styles
+import './ProductDetails.css';
+import Navbar from './components/Navbar';
 
 function ProductDetails() {
   const { id } = useParams(); // Get product ID from the URL
@@ -36,18 +37,21 @@ function ProductDetails() {
   }
 
   return (
-    <div className="product-details-container">
-      <h1 className="product-title">{product.name}</h1>
-      <img
-        className="product-image"
-        src={`http://127.0.0.1:8000${product.image}`}
-        alt={product.name}
-      />
-      <p className="product-description">{product.description}</p>
-      <p className="product-price">{`Price: $${product.price.toFixed(2)}`}</p>
-      <div className="product-meta">
-        <span>{`Category: ${product.category}`}</span>
-        <span>{`Condition: ${product.condition}`}</span>
+    <div className="product-details">
+      <Navbar />
+      <div className="product-details-container">
+        <h1 className="product-title">{product.name}</h1>
+        <img
+          className="product-image"
+          src={`http://127.0.0.1:8000${product.image}`}
+          alt={product.name}
+        />
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">{`Price: $${product.price.toFixed(2)}`}</p>
+        <div className="product-meta">
+          <span>{`Category: ${product.category}`}</span>
+          <span>{`Condition: ${product.condition}`}</span>
+        </div>
       </div>
     </div>
   );

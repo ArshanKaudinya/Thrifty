@@ -1,4 +1,3 @@
-/* General Layout */
 .browsing-page {
   display: flex;
   flex-direction: column;
@@ -6,17 +5,15 @@
   background-color: #fff;
 }
 
-/* Content Container */
 .content-container {
   display: flex;
   flex-direction: row;
   margin-top: 5vh;
 }
 
-/* Item Grid */
 .item-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30vh, 30vh)); /* Consistent size, expands horizontally */
+  grid-template-columns: repeat(auto-fill, minmax(30vh, 30vh));
   gap: 3vh;
   padding: 2vh;
   width: 100%;
@@ -25,7 +22,6 @@
 .a {
   text-decoration: none ;
 }
-/* Item Card */
 .item-card {
   display: flex;
   flex-direction: column;
@@ -42,19 +38,17 @@
 
 .item-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 1vh 2vh rgba(17, 125, 243, 0.3); /* Adds glow effect */
+  box-shadow: 0 1vh 2vh rgba(17, 125, 243, 0.3);
 }
 
-/* Item Image */
 .item-image {
   width: 100%;
-  height: 25vh;
   object-fit: cover;
   border-radius: 1.5vh;
   margin-bottom: 1vh;
+  border-radius: inherit;
 }
 
-/* Item Title */
 .item-title {
   font-size: 2vh;
   font-weight: bold;
@@ -62,13 +56,11 @@
   margin-bottom: 1vh;
 }
 
-/* Item Price */
 .item-price {
   font-size: 1.8vh;
   color: #555;
 }
 
-/* No Items Message */
 .no-items {
   font-size: 2vh;
   text-align: center;
