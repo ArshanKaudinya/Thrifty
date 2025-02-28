@@ -83,7 +83,7 @@ function UploadProduct() {
       <Navbar />
       <div className="upload-container">
         <div className="left-panel">
-          <h1>Upload Product</h1>
+          <h1>Upld Product</h1>
           <form id="upload-form" onSubmit={handleSubmit}>
             <input
               type="text"

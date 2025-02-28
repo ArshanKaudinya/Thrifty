@@ -93,9 +93,9 @@ function LandingPage() {
           <div className="footer-social">
             <h4>Follow Us</h4>
             <div className="social-icons">
-              <a href="#"><img src={facebook_icon} alt="Facebook" /></a>
-              <a href="#"><img src={linkedin_icon} alt="LinkedIn" /></a>
-              <a href="#"><img src={instagram_icon} alt="Instagram" /></a>
+              <a href="https://github.com/ArshanKaudinya"><img src={facebook_icon} alt="Facebook" /></a>
+              <a href="https://github.com/ArshanKaudinya"><img src={linkedin_icon} alt="LinkedIn" /></a>
+              <a href="https://github.com/ArshanKaudinya"><img src={instagram_icon} alt="Instagram" /></a>
             </div>
           </div>
 
@@ -111,17 +111,17 @@ function LandingPage() {
           {/* Help and Support */}
           <div className="footer-help">
             <h4>Help & Support</h4>
-            <a href="#">FAQs</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Live Chat</a>
+            <a href="https://github.com/ArshanKaudinya">FAQs</a>
+            <a href="https://github.com/ArshanKaudinya">Contact Us</a>
+            <a href="https://github.com/ArshanKaudinya">Live Chat</a>
           </div>
 
           {/* Legal Links */}
           <div className="footer-legal">
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Ads Info</a>
-            <a href="#">Trademark</a>
+            <a href="https://github.com/ArshanKaudinya">Terms & Conditions</a>
+            <a href="https://github.com/ArshanKaudinya">Privacy Policy</a>
+            <a href="https://github.com/ArshanKaudinya">Ads Info</a>
+            <a href="https://github.com/ArshanKaudinya">Trademark</a>
           </div>
         </footer>
       </div>

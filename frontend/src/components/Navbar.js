@@ -60,12 +60,11 @@ function Navbar() {
     e.currentTarget.classList.add('search-icon-clicked');
   };
 
-  // Redirect based on authentication status
   const handleAvatarClick = () => {
     if (isSignedIn) {
-      navigate('/account'); // Redirect to Account Page if signed in
+      navigate('/account');
     } else {
-      navigate('/login'); // Redirect to Login Page if not signed in
+      navigate('/login');
     }
   };
 
